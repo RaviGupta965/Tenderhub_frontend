@@ -144,21 +144,21 @@ function MyTenders() {
 
                 <div className="flex justify-between items-center">
                   <Badge variant="outline">{tender.category}</Badge>
-                  <div className="space-x-2">
-                    <Button
-                      onClick={() => handleDeleteclick(tender.id)}
-                      size="sm"
-                    >
-                      Delete
-                    </Button>
-                    <Button
-                      variant="outline"
-                      onClick={() => handleViewApplications(tender.id)}
-                      size="sm"
-                    >
-                      View Applications
-                    </Button>
-                  </div>
+                    <div className="space-x-2">
+                      <Button
+                        onClick={() => handleDeleteclick(tender.id)}
+                        size="sm"
+                      >
+                        Delete
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => handleViewApplications(tender.id)}
+                        size="sm"
+                      >
+                        View Applications
+                      </Button>
+                    </div>
                 </div>
               </CardContent>
             </Card>
