@@ -37,6 +37,10 @@ A full-stack web application that allows businesses to create and apply for tend
 
 ## 🚀 Getting Started
 
+https://github.com/user-attachments/assets/b49d465a-be8a-438a-aecd-fd91c98e963e
+
+
+
 ### 1️⃣ Backend Setup
 
 ```bash
