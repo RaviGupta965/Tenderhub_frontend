@@ -25,7 +25,7 @@ const Tenders = () => {
 
 
       try {
-        const res = await fetch("http://localhost:5000/api/");
+        const res = await fetch("https://tenderhub-backend.onrender.com/api/");
 
         if (!res.ok) {
           throw new Error("Failed to fetch tenders");

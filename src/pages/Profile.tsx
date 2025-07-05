@@ -31,7 +31,7 @@ const Profile = () => {
     }
     const fetchProfile = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/profile", {
+        const res = await fetch("https://tenderhub-backend.onrender.com/api/profile", {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
@@ -73,7 +73,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem("auth_token");
 
-      const response = await fetch("http://localhost:5000/api/edit-profile", {
+      const response = await fetch("https://tenderhub-backend.onrender.com/api/edit-profile", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

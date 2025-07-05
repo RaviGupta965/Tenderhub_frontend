@@ -41,7 +41,7 @@ const TenderForm = () => {
                 navigate("/login");
                 return;
             }
-            const response = await fetch(`http://localhost:5000/api/application/${tenderId}`, {
+            const response = await fetch(`https://tenderhub-backend.onrender.com/api/application/${tenderId}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

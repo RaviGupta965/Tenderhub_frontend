@@ -21,7 +21,7 @@ const ViewApplications = () => {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/application/tender/${tenderId}`);
+        const res = await fetch(`https://tenderhub-backend.onrender.com/api/application/tender/${tenderId}`);
         if (!res.ok) {
           throw new Error("Failed to fetch applications");
         }

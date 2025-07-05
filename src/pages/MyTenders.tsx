@@ -26,7 +26,7 @@ function MyTenders() {
       const userId = parsedData.id;
 
       try {
-        const res = await fetch(`http://localhost:5000/api/application/${userId}`);
+        const res = await fetch(`https://tenderhub-backend.onrender.com/api/application/${userId}`);
         if (!res.ok) {
           throw new Error("Failed to fetch tenders of the user");
         }
@@ -45,7 +45,7 @@ function MyTenders() {
       const confirmDelete = window.confirm("Are you sure you want to delete this tender?");
 
       if (!confirmDelete) return;
-      const res = await fetch(`http://localhost:5000/api/application/${tenderId}`, {
+      const res = await fetch(`https://tenderhub-backend.onrender.com/api/application/${tenderId}`, {
         method: "DELETE"
       });
       if (!res.ok) {

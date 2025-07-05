@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Building } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,6 +19,8 @@ function Navigation() {
     localStorage.removeItem("user_data");
     navigate("/");
   };
+
+  const isActive = (path: string) => location.pathname.startsWith(path);
   return (
     <header className="bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,10 +31,30 @@ function Navigation() {
               <span className="text-xl font-bold">TenderHub</span>
             </Link>
             <nav className="hidden md:flex space-x-6">
-              <Link to="/dashboard" className="text-blue-600 font-medium">Dashboard</Link>
-              <Link to="/tenders" className="text-gray-600 hover:text-blue-600">Tenders</Link>
-              <Link to="/companies" className="text-gray-600 hover:text-blue-600">Companies</Link>
-              <Link to="/profile" className="text-gray-600 hover:text-blue-600">Profile</Link>
+              <Link
+                to="/dashboard"
+                className={isActive("/dashboard") ? "text-blue-600 font-semibold" : "text-gray-600 hover:text-blue-600"}
+              >
+                Dashboard
+              </Link>
+              <Link
+                to="/tenders"
+                className={isActive("/tenders") ? "text-blue-600 font-semibold" : "text-gray-600 hover:text-blue-600"}
+              >
+                Tenders
+              </Link>
+              <Link
+                to="/companies"
+                className={isActive("/companies") ? "text-blue-600 font-semibold" : "text-gray-600 hover:text-blue-600"}
+              >
+                Companies
+              </Link>
+              <Link
+                to="/profile"
+                className={isActive("/profile") ? "text-blue-600 font-semibold" : "text-gray-600 hover:text-blue-600"}
+              >
+                Profile
+              </Link>
             </nav>
           </div>
           {user ? (

@@ -11,74 +11,40 @@ const Companies = () => {
   const [user, setUser] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-
+  const [mockCompanies, setmockCompanies] = useState([]);
   useEffect(() => {
     const authToken = localStorage.getItem("auth_token");
     const userData = localStorage.getItem("user_data");
-    
+
     if (!authToken || !userData) {
       navigate("/login");
       return;
     }
-    
     setUser(JSON.parse(userData));
+
+    const fetchcompanies = async () => {
+      try {
+        const res = await fetch('https://tenderhub-backend.onrender.com/api/get-all');
+        if (!res.ok) {
+          throw new Error("Failed to fetch tenders of the user");
+        }
+        const data = await res.json();
+        setmockCompanies(data);
+      } catch (err) {
+        console.error("Error fetching tenders:", err);
+      }
+    }
+    fetchcompanies()
   }, [navigate]);
 
-  const mockCompanies = [
-    {
-      id: 1,
-      name: "Tech Innovations Inc",
-      industry: "Technology",
-      description: "Leading software development company specializing in enterprise solutions and mobile applications.",
-      location: "San Francisco, CA",
-      employees: "201-500",
-      website: "www.techinnovations.com",
-      email: "contact@techinnovations.com",
-      services: ["Software Development", "Mobile Apps", "Cloud Solutions", "AI/ML"],
-      logo: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      name: "Creative Marketing Solutions",
-      industry: "Marketing",
-      description: "Full-service marketing agency helping brands create impactful campaigns and digital experiences.",
-      location: "New York, NY",
-      employees: "51-200",
-      website: "www.creativemarketingsol.com",
-      email: "hello@creativemarketingsol.com",
-      services: ["Digital Marketing", "Brand Strategy", "Content Creation", "Social Media"],
-      logo: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      name: "Global Supply Chain Ltd",
-      industry: "Logistics",
-      description: "International logistics and supply chain management company with global reach.",
-      location: "Chicago, IL",
-      employees: "501-1000",
-      website: "www.globalsupplychain.com",
-      email: "info@globalsupplychain.com",
-      services: ["Logistics", "Supply Chain", "Warehousing", "Distribution"],
-      logo: "/placeholder.svg"
-    },
-    {
-      id: 4,
-      name: "Green Energy Solutions",
-      industry: "Energy",
-      description: "Renewable energy company focused on solar and wind power solutions for businesses.",
-      location: "Austin, TX",
-      employees: "101-200",
-      website: "www.greenenergysol.com",
-      email: "contact@greenenergysol.com",
-      services: ["Solar Power", "Wind Energy", "Energy Consulting", "Installation"],
-      logo: "/placeholder.svg"
-    }
-  ];
+
+useEffect(() => {
+  console.log(mockCompanies);
+}, [mockCompanies]);
 
   const filteredCompanies = mockCompanies.filter(company =>
-    company.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    company.industry.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    company.services.some(service => service.toLowerCase().includes(searchTerm.toLowerCase()))
+    company.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    company.industry.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (!user) {
@@ -88,7 +54,7 @@ const Companies = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <Navigation/>
+      <Navigation />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header Section */}
@@ -122,7 +88,7 @@ const Companies = () => {
                     <Building className="h-8 w-8 text-gray-400" />
                   </div>
                   <div className="flex-1">
-                    <CardTitle className="text-xl">{company.name}</CardTitle>
+                    <CardTitle className="text-xl">{company.company}</CardTitle>
                     <CardDescription className="flex items-center mt-1">
                       <Badge variant="outline" className="mr-2">{company.industry}</Badge>
                     </CardDescription>
@@ -131,7 +97,7 @@ const Companies = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">{company.description}</p>
-                
+
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center text-sm text-gray-600">
                     <MapPin className="h-4 w-4 mr-2" />
@@ -145,11 +111,6 @@ const Companies = () => {
                     <Mail className="h-4 w-4 mr-2" />
                     <span>{company.email}</span>
                   </div>
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <Button variant="outline" size="sm">View Profile</Button>
-                  <Button size="sm">Contact</Button>
                 </div>
               </CardContent>
             </Card>

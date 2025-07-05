@@ -1,53 +1,9 @@
-
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Building, Search, FileText, Users, ArrowRight, Calendar, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navigation from "./Navigation";
 
 const Index = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Mock data for featured tenders
-  const featuredTenders = [
-    {
-      id: 1,
-      title: "Cloud Infrastructure Migration",
-      company: "TechCorp Solutions",
-      budget: "$50,000 - $75,000",
-      deadline: "2024-08-15",
-      description: "Looking for experienced cloud migration specialists to help transition our legacy systems to AWS infrastructure.",
-      industry: "Technology"
-    },
-    {
-      id: 2,
-      title: "Marketing Campaign Development",
-      company: "GreenLife Industries",
-      budget: "$25,000 - $40,000",
-      deadline: "2024-07-30",
-      description: "Seeking creative agency to develop comprehensive digital marketing campaign for sustainable products launch.",
-      industry: "Manufacturing"
-    },
-    {
-      id: 3,
-      title: "Financial Audit Services",
-      company: "RetailMax Chain",
-      budget: "$15,000 - $25,000",
-      deadline: "2024-08-10",
-      description: "Required: Certified accounting firm for annual financial audit and compliance review.",
-      industry: "Retail"
-    }
-  ];
-
-  const stats = [
-    { label: "Active Tenders", value: "1,247", icon: FileText },
-    { label: "Registered Companies", value: "3,891", icon: Building },
-    { label: "Successful Matches", value: "856", icon: Users },
-    { label: "Total Value", value: "$12.4M", icon: DollarSign }
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header */}

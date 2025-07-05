@@ -25,7 +25,7 @@ A full-stack web application that allows businesses to create and apply for tend
 - TailwindCSS
 - React Hook Form + Zod (Form validation)
 - Axios, Fetch API
-
+---
 ### ⚙️ Backend
 
 - Express.js (Node.js)
@@ -34,20 +34,6 @@ A full-stack web application that allows businesses to create and apply for tend
 - JSON Web Tokens (JWT) for Authentication
 - CORS, dotenv, bcrypt
 
----
-
-## 📁 Project Structure
-
-/tender-platform
-├── /client # Next.js frontend
-│ └── /components, /app, /lib, etc.
-├── /server # Express.js backend
-│ ├── /routes # All API routes
-│ ├── /controllers
-│ ├── /db # Knex migrations/seeds
-│ └── /utils
-
----
 
 ## 🚀 Getting Started
 
@@ -61,7 +47,7 @@ npx knex migrate:latest
 npx knex seed:run
 npm run dev
 
-### 2️⃣ Frontend Setup
+2️⃣ Frontend Setup
 ```bash
 cd client
 npm install

@@ -31,7 +31,7 @@ function CreateTender() {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/api/create", {
+    const res = await fetch("https://tenderhub-backend.onrender.com/api/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
