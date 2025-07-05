@@ -13,7 +13,9 @@ import Companies from "./pages/Companies";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import CreateTender from './pages/CreateTender.tsx'
-
+import TenderForm from "./pages/TenderForm.tsx";
+import MyTenders from './pages/MyTenders.tsx'
+import ViewApplications from "./pages/ViewApplications.tsx";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -31,6 +33,9 @@ const App = () => (
           <Route path="/companies" element={<Companies />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-tender" element={<CreateTender />} />
+          <Route path="/apply/:tenderId" element={<TenderForm />} />
+          <Route path="/get-tenders" element={<MyTenders />} />
+          <Route path="/tender/:tenderId" element={<ViewApplications />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

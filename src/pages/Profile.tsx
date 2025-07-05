@@ -5,10 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import { Building, Mail, MapPin, Globe, Upload, Save, Edit } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import Navigation from "./Navigation";
 const Profile = () => {
   const [user, setUser] = useState<any>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -112,31 +111,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-4">
-              <Link to="/" className="flex items-center space-x-2 text-blue-600">
-                <Building className="h-8 w-8" />
-                <span className="text-xl font-bold">TenderHub</span>
-              </Link>
-              <nav className="hidden md:flex space-x-6">
-                <Link to="/dashboard" className="text-gray-600 hover:text-blue-600">Dashboard</Link>
-                <Link to="/tenders" className="text-gray-600 hover:text-blue-600">Tenders</Link>
-                <Link to="/companies" className="text-gray-600 hover:text-blue-600">Companies</Link>
-                <Link to="/profile" className="text-blue-600 font-medium">Profile</Link>
-              </nav>
-            </div>
-            <Button onClick={() => {
-              localStorage.removeItem("auth_token");
-              localStorage.removeItem("user_data");
-              navigate("/");
-            }}>
-              Logout
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Navigation/>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header Section */}

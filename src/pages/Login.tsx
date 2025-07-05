@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Building, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",

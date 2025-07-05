@@ -4,35 +4,34 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import {Search, Calendar, DollarSign, MapPin, Plus } from "lucide-react";
+import { Search, Calendar, DollarSign, MapPin, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
-const Tenders = () => {
+function MyTenders() {
   const [tenders, setTenders] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  const [userdata, setuserdata] = useState('');
+
   useEffect(() => {
     const fetchTenders = async () => {
       const authToken = localStorage.getItem("auth_token");
-      const data = localStorage.getItem('user_data');
-      const parsedData = JSON.parse(data);
-      setuserdata(parsedData.company || "");
 
       if (!authToken) {
         navigate("/login");
         return;
       }
+      const data = localStorage.getItem('user_data');
+      const parsedData = JSON.parse(data);
+      console.log(parsedData)
+      const userId = parsedData.id;
 
       try {
-        const res = await fetch("http://localhost:5000/api/");
-
+        const res = await fetch(`http://localhost:5000/api/application/${userId}`);
         if (!res.ok) {
-          throw new Error("Failed to fetch tenders");
+          throw new Error("Failed to fetch tenders of the user");
         }
-
         const data = await res.json();
-        setTenders(data); // Assuming you have a `setTenders` state setter
+        setTenders(data);
       } catch (err) {
         console.error("Error fetching tenders:", err);
       }
@@ -41,31 +40,56 @@ const Tenders = () => {
     fetchTenders();
   }, [navigate]);
 
-  const handleclick = () => {
-    navigate("/create-tender")
+  const handleDeleteclick = async (tenderId: string) => {
+    try {
+      const confirmDelete = window.confirm("Are you sure you want to delete this tender?");
+
+      if (!confirmDelete) return;
+      const res = await fetch(`http://localhost:5000/api/application/${tenderId}`, {
+        method: "DELETE"
+      });
+      if (!res.ok) {
+        throw new Error("Failed to fetch tenders of the user");
+      }
+      const data = await res.json();
+      if (!res.ok) {
+        console.log('ERROR :: WHILE DELETING', res);
+      }
+      navigate('./');
+    } catch (err) {
+      console.error("Error fetching tenders:", err);
+    }
   }
+
+
+  const handleViewApplications = (tenderId: string) => {
+    navigate(`/tender/${tenderId}`);
+  };
+
+
   const filteredTenders = tenders.filter(tender =>
     tender.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     tender.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
     tender.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const handleapplyclick = (id:string)=>{
+  const handleapplyclick = (id: string) => {
     navigate(`/apply/${id}`)
   }
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <Navigation/>
+      <Navigation />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header Section */}
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Tenders</h1>
-            <p className="text-gray-600 mt-2">Browse and apply to available business opportunities</p>
+            <p className="text-gray-600 mt-2">
+              Browse and apply to available business opportunities
+            </p>
           </div>
-          <Button onClick={handleclick} className="flex items-center space-x-2">
+          <Button onClick={() => navigate('/create-tender')} className="flex items-center space-x-2">
             <Plus className="h-4 w-4" />
             <span>Create Tender</span>
           </Button>
@@ -110,7 +134,7 @@ const Tenders = () => {
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <Calendar className="h-4 w-4 mr-2" />
-                    <span>Deadline: {tender.deadline}</span>
+                    <span>Deadline: {new Date(tender.deadline).toLocaleDateString("en-CA")}</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <MapPin className="h-4 w-4 mr-2" />
@@ -121,9 +145,19 @@ const Tenders = () => {
                 <div className="flex justify-between items-center">
                   <Badge variant="outline">{tender.category}</Badge>
                   <div className="space-x-2">
-                    {userdata !== tender.company && (
-                      <Button onClick={()=>handleapplyclick(tender.id)} size="sm">Apply Now</Button>
-                    )}
+                    <Button
+                      onClick={() => handleDeleteclick(tender.id)}
+                      size="sm"
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => handleViewApplications(tender.id)}
+                      size="sm"
+                    >
+                      View Applications
+                    </Button>
                   </div>
                 </div>
               </CardContent>
@@ -134,13 +168,15 @@ const Tenders = () => {
         {filteredTenders.length === 0 && (
           <Card>
             <CardContent className="text-center py-12">
-              <p className="text-gray-500">No tenders found matching your search criteria.</p>
+              <p className="text-gray-500">
+                No Tender Found
+              </p>
             </CardContent>
           </Card>
         )}
       </div>
     </div>
   );
-};
+}
 
-export default Tenders;
+export default MyTenders;

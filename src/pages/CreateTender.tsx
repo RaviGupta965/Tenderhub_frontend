@@ -1,11 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
-import { Building } from "lucide-react";
+import Navigation from "./Navigation";
 function CreateTender() {
   const [form, setForm] = useState({
     title: "",
@@ -49,31 +47,7 @@ function CreateTender() {
   };
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-4">
-              <Link to="/" className="flex items-center space-x-2 text-blue-600">
-                <Building className="h-8 w-8" />
-                <span className="text-xl font-bold">TenderHub</span>
-              </Link>
-              <nav className="hidden md:flex space-x-6">
-                <Link to="/dashboard" className="text-blue-600 font-medium">Dashboard</Link>
-                <Link to="/tenders" className="text-gray-600 hover:text-blue-600">Tenders</Link>
-                <Link to="/companies" className="text-gray-600 hover:text-blue-600">Companies</Link>
-                <Link to="/profile" className="text-gray-600 hover:text-blue-600">Profile</Link>
-              </nav>
-            </div>
-            <Button onClick={() => {
-              localStorage.removeItem("auth_token");
-              localStorage.removeItem("user_data");
-              navigate("/");
-            }}>
-              Logout
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Navigation/>
       
       <div className="flex justify-center px-4 py-10 bg-gray-50 min-h-screen">
         <div className="bg-white border rounded-lg p-8 w-full max-w-2xl shadow-sm">

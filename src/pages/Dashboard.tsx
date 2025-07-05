@@ -2,10 +2,9 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Building, Plus, Calendar, DollarSign, Users, TrendingUp } from "lucide-react";
+import {Plus} from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-
+import Navigation from "./Navigation";
 const Dashboard = () => {
   const [user, setUser] = useState<any>(null);
   const [recentTenders,setrecentTenders]=useState([]);
@@ -42,40 +41,10 @@ const Dashboard = () => {
     return <div>Loading...</div>;
   }
 
-  // const recentTenders = [
-  //   { id: 1, title: "Software Development Services", deadline: "2024-01-15", budget: "$50,000", status: "active" },
-  //   { id: 2, title: "Marketing Campaign", deadline: "2024-01-20", budget: "$25,000", status: "active" },
-  //   { id: 3, title: "Office Equipment Supply", deadline: "2024-01-10", budget: "$15,000", status: "closed" }
-  // ];
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-4">
-              <Link to="/" className="flex items-center space-x-2 text-blue-600">
-                <Building className="h-8 w-8" />
-                <span className="text-xl font-bold">TenderHub</span>
-              </Link>
-              <nav className="hidden md:flex space-x-6">
-                <Link to="/dashboard" className="text-blue-600 font-medium">Dashboard</Link>
-                <Link to="/tenders" className="text-gray-600 hover:text-blue-600">Tenders</Link>
-                <Link to="/companies" className="text-gray-600 hover:text-blue-600">Companies</Link>
-                <Link to="/profile" className="text-gray-600 hover:text-blue-600">Profile</Link>
-              </nav>
-            </div>
-            <Button onClick={() => {
-              localStorage.removeItem("auth_token");
-              localStorage.removeItem("user_data");
-              navigate("/");
-            }}>
-              Logout
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Navigation/>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
@@ -104,6 +73,9 @@ const Dashboard = () => {
               </Link>
               <Link to="/companies">
                 <Button variant="outline" className="w-full justify-start">Find Companies</Button>
+              </Link>
+              <Link to="/get-tenders">
+                <Button variant="outline" className="w-full justify-start">Your Tenders</Button>
               </Link>
             </CardContent>
           </Card>

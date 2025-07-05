@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Building, Search, FileText, Users, ArrowRight, Calendar, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
+import Navigation from "./Navigation";
 
 const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,37 +51,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <Building className="h-8 w-8 text-blue-600" />
-              <h1 className="text-2xl font-bold text-gray-900">TenderHub</h1>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link to="/tenders" className="text-gray-600 hover:text-blue-600 transition-colors">Browse Tenders</Link>
-              <Link to="/companies" className="text-gray-600 hover:text-blue-600 transition-colors">Find Companies</Link>
-              <Link to="/about" className="text-gray-600 hover:text-blue-600 transition-colors">About</Link>
-            </nav>
-            <div className="flex items-center space-x-4">
-              {!isLoggedIn ? (
-                <>
-                  <Link to="/login">
-                    <Button variant="ghost">Sign In</Button>
-                  </Link>
-                  <Link to="/register">
-                    <Button>Get Started</Button>
-                  </Link>
-                </>
-              ) : (
-                <Link to="/dashboard">
-                  <Button>Dashboard</Button>
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navigation/>
 
       {/* Hero Section */}
       <section className="relative py-20">
