@@ -15,14 +15,14 @@ const Tenders = () => {
   useEffect(() => {
     const fetchTenders = async () => {
       const authToken = localStorage.getItem("auth_token");
-      const data = localStorage.getItem('user_data');
-      const parsedData = JSON.parse(data);
-      setuserdata(parsedData.company || "");
-
       if (!authToken) {
         navigate("/login");
         return;
       }
+      const data = localStorage.getItem('user_data');
+      const parsedData = JSON.parse(data);
+      setuserdata(parsedData.company || "");
+
 
       try {
         const res = await fetch("http://localhost:5000/api/");

@@ -82,69 +82,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="flex justify-center mb-4">
-                  <stat.icon className="h-8 w-8 text-blue-600" />
-                </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
-                <div className="text-gray-600">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Tenders */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Opportunities</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Discover high-value tenders from leading companies across various industries
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredTenders.map((tender) => (
-              <Card key={tender.id} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex justify-between items-start mb-2">
-                    <Badge variant="secondary">{tender.industry}</Badge>
-                    <div className="text-sm text-gray-500 flex items-center">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      {tender.deadline}
-                    </div>
-                  </div>
-                  <CardTitle className="text-lg">{tender.title}</CardTitle>
-                  <CardDescription className="text-blue-600 font-medium">
-                    {tender.company}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-4 line-clamp-3">{tender.description}</p>
-                  <div className="flex justify-between items-center">
-                    <div className="text-lg font-semibold text-green-600">{tender.budget}</div>
-                    <Button size="sm">
-                      View Details <ArrowRight className="ml-1 h-3 w-3" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link to="/tenders">
-              <Button variant="outline" size="lg">
-                View All Tenders <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      
 
       {/* How It Works */}
       <section className="py-16 bg-white">
